@@ -282,7 +282,7 @@ var askQ5 = function() {
         answerResponse.textContent = "Wrong!";
         mainEl.appendChild(answerResponse);
         question.remove();
-        //askQ6();
+        complete();
     }
 
     // Add a section for the fifth question
@@ -319,8 +319,28 @@ var askQ5 = function() {
         answerResponse.textContent = "Correct!";
         mainEl.appendChild(answerResponse);
         question.remove();
-        //askQ6();
+        complete();
     });
+}
+
+var complete = function () {
+    var completedPage = document.createElement("section");
+    var allDone = document.createElement("h1");
+    var finalScore = document.createElement("p");
+
+    // Remove the answer response on the completed page
+    answerResponse.remove();
+
+    // Add completedPage to the main element
+    mainEl.appendChild(completedPage);
+
+    // Add h1 element
+    allDone.textContent = "All done!";
+    completedPage.appendChild(allDone);
+
+    // Add p element to show final score
+    finalScore.textContent = "Your final score is "
+    completedPage.appendChild(finalScore);
 }
 
 startQuiz();
