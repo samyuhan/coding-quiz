@@ -1,9 +1,11 @@
 // Create global variables 
 var mainEl = document.querySelector("main");
+var quizEl = document.querySelector("#quiz");
 var timerEl = document.querySelector("#timer");
 var answerResponse = document.createElement("p");
 var score = 0;
-var secondsLeft = 75;
+var secondsLeft = 25;
+var finished = false;
 
 // Function for start page
 var startQuiz = function() {
@@ -15,7 +17,7 @@ var startQuiz = function() {
     
     // Add a div element for the start page
     startpage.id = "startpage"
-    mainEl.appendChild(startpage);
+    quizEl.appendChild(startpage);
 
     // Add a h1 element for the quiz title
     title.id = "quiz-title";
@@ -35,10 +37,11 @@ var startQuiz = function() {
     // Add an event listener to remove the content in startpage when the button is clicked
     startBtn.addEventListener("click", function() {
         // insert timer function
+        timer();
         title.remove();
         description.remove();
         startBtn.remove();
-        // insert question functions
+        // insert question function
         askQ1();
     });
 }
@@ -56,6 +59,7 @@ var askQ1 = function() {
     // Function for when user clicks wrong answer choice
     var wrongAnswer = function() {
         answerResponse.textContent = "Wrong!";
+        secondsLeft -= 10;
         mainEl.appendChild(answerResponse);
         question.remove();
         askQ2();
@@ -63,7 +67,7 @@ var askQ1 = function() {
 
     // Add a section for the first question
     question.className = "question";
-    mainEl.appendChild(question);
+    quizEl.appendChild(question);
 
     // Add a h1 element that shows the first question
     q1.textContent = "Commonly used data types DO NOT include:";
@@ -113,6 +117,7 @@ var askQ2 = function() {
     // Function for when user clicks wrong answer choice
     var wrongAnswer = function() {
         answerResponse.textContent = "Wrong!";
+        secondsLeft -= 10;
         mainEl.appendChild(answerResponse);
         question.remove();
         askQ3();
@@ -120,7 +125,7 @@ var askQ2 = function() {
 
     // Add a section for the second question
     question.className = "question";
-    mainEl.appendChild(question);
+    quizEl.appendChild(question);
 
     // Add a h1 element that shows the second question
     q1.textContent = "The condition in an if / else statement is enclosed within ____.";
@@ -170,6 +175,7 @@ var askQ3 = function() {
     // Function for when user clicks wrong answer choice
     var wrongAnswer = function() {
         answerResponse.textContent = "Wrong!";
+        secondsLeft -= 10;
         mainEl.appendChild(answerResponse);
         question.remove();
         askQ4();
@@ -177,7 +183,7 @@ var askQ3 = function() {
 
     // Add a section for the third question
     question.className = "question";
-    mainEl.appendChild(question);
+    quizEl.appendChild(question);
 
     // Add a h1 element that shows the third question
     q1.textContent = "Arrays in JavaScript can be used to store ____.";
@@ -227,6 +233,7 @@ var askQ4 = function() {
     // Function for when user clicks wrong answer choice
     var wrongAnswer = function() {
         answerResponse.textContent = "Wrong!";
+        secondsLeft -= 10;
         mainEl.appendChild(answerResponse);
         question.remove();
         askQ5();
@@ -234,7 +241,7 @@ var askQ4 = function() {
 
     // Add a section for the fourth question
     question.className = "question";
-    mainEl.appendChild(question);
+    quizEl.appendChild(question);
 
     // Add a h1 element that shows the fourth question
     q1.textContent = "String values must be enclosed within ____ when being assigned to variables.";
@@ -284,6 +291,7 @@ var askQ5 = function() {
     // Function for when user clicks wrong answer choice
     var wrongAnswer = function() {
         answerResponse.textContent = "Wrong!";
+        finished = true;
         mainEl.appendChild(answerResponse);
         question.remove();
         complete();
@@ -291,7 +299,7 @@ var askQ5 = function() {
 
     // Add a section for the fifth question
     question.className = "question";
-    mainEl.appendChild(question);
+    quizEl.appendChild(question);
 
     // Add a h1 element that shows the fifth question
     q1.textContent = "A very useful tool used during development and debugging for printing content to the debugger is:";
@@ -322,6 +330,7 @@ var askQ5 = function() {
     a4.addEventListener("click", function() {
         score += 20;
         answerResponse.textContent = "Correct!";
+        finished = true;
         mainEl.appendChild(answerResponse);
         question.remove();
         complete();
@@ -423,6 +432,20 @@ var highscorePage = function() {
         leaderboard.remove();
     })
     leaderboard.appendChild(clearBtn);
+}
+
+var timer = function() {
+    var timeInterval = setInterval(() => {
+        if (secondsLeft <= 0 || finished) {
+            clearInterval(timeInterval);
+            quizEl.remove();
+            complete();
+        } else {
+            secondsLeft--;
+            timerEl.textContent = secondsLeft;
+        }
+    }, 1000);
+    
 }
 
 startQuiz();
