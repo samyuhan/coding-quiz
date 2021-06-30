@@ -87,6 +87,7 @@ var askQ1 = function() {
     a3.textContent = "3. alerts";
     answers.appendChild(a3);
     a3.addEventListener("click", function() {
+        score += 20;
         answerResponse.textContent = "Correct!";
         mainEl.appendChild(answerResponse);
         question.remove();
@@ -143,6 +144,7 @@ var askQ2 = function() {
     a3.textContent = "3. parentheses";
     answers.appendChild(a3);
     a3.addEventListener("click", function() {
+        score += 20;
         answerResponse.textContent = "Correct!";
         mainEl.appendChild(answerResponse);
         question.remove();
@@ -204,6 +206,7 @@ var askQ3 = function() {
     a4.textContent = "4. all of the above";
     answers.appendChild(a4);
     a4.addEventListener("click", function() {
+        score += 20;
         answerResponse.textContent = "Correct!";
         mainEl.appendChild(answerResponse);
         question.remove();
@@ -255,6 +258,7 @@ var askQ4 = function() {
     a3.textContent = "3. quotes";
     answers.appendChild(a3);
     a3.addEventListener("click", function() {
+        score += 20;
         answerResponse.textContent = "Correct!";
         mainEl.appendChild(answerResponse);
         question.remove();
@@ -316,6 +320,7 @@ var askQ5 = function() {
     a4.textContent = "4. console.log";
     answers.appendChild(a4);
     a4.addEventListener("click", function() {
+        score += 20;
         answerResponse.textContent = "Correct!";
         mainEl.appendChild(answerResponse);
         question.remove();
@@ -363,6 +368,7 @@ var complete = function () {
 
     submitBtn.addEventListener("click", function() {
         var initals = initalsInput.value;
+
         // Store in local storage
         localStorage.setItem("initals", initals);
         localStorage.setItem("score", score);
