@@ -327,6 +327,7 @@ var complete = function () {
     var completedPage = document.createElement("section");
     var allDone = document.createElement("h1");
     var finalScore = document.createElement("p");
+    var askInitials = document.createElement("label");
 
     // Remove the answer response on the completed page
     answerResponse.remove();
@@ -339,8 +340,38 @@ var complete = function () {
     completedPage.appendChild(allDone);
 
     // Add p element to show final score
-    finalScore.textContent = "Your final score is "
+    finalScore.textContent = "Your final score is " + score;
     completedPage.appendChild(finalScore);
+
+    // Add label to ask for initials
+    askInitials.textContent = "Enter Initials:";
+    askInitials.setAttribute("for", "input");
+    completedPage.appendChild(askInitials);
+
+    // Add input element to have user type initials
+    var initalsInput = document.createElement("Input");
+    initalsInput.setAttribute("id", "input")
+    initalsInput.setAttribute("name", "input");
+    initalsInput.setAttribute("type", "text");
+    completedPage.appendChild(initalsInput);
+    
+    // Add submit button to save initials
+    var submitBtn = document.createElement("button");
+    submitBtn.textContent = "Submit";
+    submitBtn.id = "submit-btn";
+    completedPage.appendChild(submitBtn);
+
+    submitBtn.addEventListener("click", function() {
+        var initals = initalsInput.value;
+        // Store in local storage
+        localStorage.setItem("initals", initals);
+        localStorage.setItem("score", score);
+        
+        completedPage.remove();
+        
+        //highscorePage();
+    })
+
 }
 
 startQuiz();
