@@ -4,7 +4,7 @@ var quizEl = document.querySelector("#quiz");
 var timerEl = document.querySelector("#timer");
 var answerResponse = document.createElement("p");
 var score = 0;
-var secondsLeft = 25;
+var secondsLeft = 75;
 var finished = false;
 
 // Function for start page
@@ -417,6 +417,7 @@ var highscorePage = function() {
         score = 0;
         secondsLeft = 75;
         highscores.remove();
+
         startQuiz();
     });
     leaderboard.appendChild(backBtn);
