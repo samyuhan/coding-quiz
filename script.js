@@ -375,9 +375,54 @@ var complete = function () {
         
         completedPage.remove();
         
-        //highscorePage();
+        highscorePage();
     })
+}
 
+var highscorePage = function() {
+    // Create local variables
+    var highscores = document.createElement("section");
+    var highscoresTitle = document.createElement("h1");
+    var initals = localStorage.getItem("initals");
+    var storedScore = localStorage.getItem("score");
+    var leaderboard = document.createElement("p");
+    var backBtn = document.createElement("button");
+    var clearBtn = document.createElement("button");
+
+    // Add highscores section
+    highscores.id = "highscores";
+    mainEl.appendChild(highscores);
+
+    // Add h1 element to show Highscores title
+    highscoresTitle.textContent = "Highscores";
+    highscores.appendChild(highscoresTitle);
+
+    // Add p element to show leaderboard
+    leaderboard.textContent = "1. " + initals + " - " + storedScore;
+    highscores.appendChild(leaderboard);
+
+    // Add return button
+    backBtn.id = "back-btn";
+    backBtn.textContent = "Go Back";
+    backBtn.addEventListener("click", function() {
+        score = 0;
+        secondsLeft = 75;
+        highscores.remove();
+        startQuiz();
+    });
+    leaderboard.appendChild(backBtn);
+    
+    // Add clear button
+    clearBtn.id = "clear-btn";
+    clearBtn.textContent = "Clear Highscores";
+    clearBtn.addEventListener("click", function() {
+        // Empty local storage
+        localStorage.removeItem("initals")
+        localStorage.removeItem("score")
+        
+        leaderboard.remove();
+    })
+    leaderboard.appendChild(clearBtn);
 }
 
 startQuiz();
