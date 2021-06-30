@@ -1,6 +1,7 @@
 // Create global variables 
 var mainEl = document.querySelector("main");
 var timerEl = document.querySelector("#timer");
+var footerEl = document.querySelector("#answer-response");
 var score = 0;
 var secondsLeft = 75;
 
@@ -33,9 +34,48 @@ var startQuiz = function() {
 
     // Add an event listener to remove the content in startpage when the button is clicked
     startBtn.addEventListener("click", function() {
+        // insert timer function
         title.remove();
         description.remove();
         startBtn.remove();
+        // insert question functions
+        askQ1();
     });
 }
+
+var askQ1 = function() {
+    // Create local variables
+    var question = document.createElement("section");
+    var q1 = document.createElement("h1");
+    var answers = document.createElement("section");
+    var a1 = document.createElement("button");
+    var a2 = document.createElement("button");
+    var a3 = document.createElement("button");
+    var a4 = document.createElement("button");
+    var answerResponse = document.createElement("p");
+
+    // Add a section for the first question
+    question.className = "question";
+    mainEl.appendChild(question);
+
+    // Add a h1 element that shows the first question
+    q1.textContent = "Commonly used data types DO NOT include:";
+    question.appendChild(q1);
+
+    // Add a section for the answers
+    answers.className = "answers";
+    question.appendChild(answers);
+
+    // Add a button for first answer choice
+    a1.textContent = "1. strings";
+    answers.appendChild(a1);
+    a1.addEventListener("click", function() {
+        answerResponse.textContent = "Wrong!"
+        question.appendChild(answerResponse);
+
+    })
+
+  
+}
+
 startQuiz();
