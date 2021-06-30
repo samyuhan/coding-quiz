@@ -1,10 +1,9 @@
 // Create global variables 
 var mainEl = document.querySelector("main");
 var timerEl = document.querySelector("#timer");
+var answerResponse = document.createElement("p");
 var score = 0;
 var secondsLeft = 75;
-
-
 
 // Function for start page
 var startQuiz = function() {
@@ -53,13 +52,13 @@ var askQ1 = function() {
     var a2 = document.createElement("button");
     var a3 = document.createElement("button");
     var a4 = document.createElement("button");
-    var answerResponse = document.createElement("p");
 
+    // Function for when user clicks wrong answer choice
     var wrongAnswer = function() {
         answerResponse.textContent = "Wrong!";
         mainEl.appendChild(answerResponse);
         question.remove();
-        //askQ2();
+        askQ2();
     }
 
     // Add a section for the first question
@@ -91,11 +90,67 @@ var askQ1 = function() {
         answerResponse.textContent = "Correct!";
         mainEl.appendChild(answerResponse);
         question.remove();
-        //askQ2();
+        askQ2();
     });
 
     // Add a button for fourth answer choice
     a4.textContent = "4. numbers";
+    answers.appendChild(a4);
+    a4.addEventListener("click", wrongAnswer);
+}
+
+var askQ2 = function() {
+    // Create local variables
+    var question = document.createElement("section");
+    var q1 = document.createElement("h1");
+    var answers = document.createElement("section");
+    var a1 = document.createElement("button");
+    var a2 = document.createElement("button");
+    var a3 = document.createElement("button");
+    var a4 = document.createElement("button");
+
+    // Function for when user clicks wrong answer choice
+    var wrongAnswer = function() {
+        answerResponse.textContent = "Wrong!";
+        mainEl.appendChild(answerResponse);
+        question.remove();
+        //askQ3();
+    }
+
+    // Add a section for the second question
+    question.className = "question";
+    mainEl.appendChild(question);
+
+    // Add a h1 element that shows the first question
+    q1.textContent = "The condition in an if / else statement is enclosed within ____.";
+    question.appendChild(q1);
+
+    // Add a section for the answers
+    answers.className = "answers";
+    question.appendChild(answers);
+
+    // Add a button for first answer choice
+    a1.textContent = "1. quotes";
+    answers.appendChild(a1);
+    a1.addEventListener("click", wrongAnswer);
+
+    // Add a button for second answer choice
+    a2.textContent = "2. curly brackets";
+    answers.appendChild(a2);
+    a2.addEventListener("click", wrongAnswer);
+
+    // Add a button for third answer choice
+    a3.textContent = "3. parentheses";
+    answers.appendChild(a3);
+    a3.addEventListener("click", function() {
+        answerResponse.textContent = "Correct!";
+        mainEl.appendChild(answerResponse);
+        question.remove();
+        //askQ3();
+    });
+
+    // Add a button for fourth answer choice
+    a4.textContent = "4. square brackets";
     answers.appendChild(a4);
     a4.addEventListener("click", wrongAnswer);
 }
